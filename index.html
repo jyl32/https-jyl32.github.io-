@@ -14,6 +14,8 @@
         <button type="submit">전송</button>
     </form>
 
+    <div id="messages-container"></div>
+
     <script>
         // 웹 소켓 서버에 연결
         const socket = new WebSocket('ws://localhost:3000');
@@ -26,6 +28,8 @@
         // 웹 소켓으로부터 메시지를 수신했을 때 이벤트 핸들러
         socket.addEventListener('message', function (event) {
             console.log('서버로부터 메시지 수신:', event.data);
+            // 메시지를 DOM에 추가하여 화면에 표시
+            appendMessage(event.data);
         });
 
         // 폼 전송 이벤트 리스너
@@ -40,6 +44,14 @@
                 messageInput.value = ''; // 입력 필드 초기화
             }
         });
+
+        // 메시지를 DOM에 추가하여 화면에 표시하는 함수
+        function appendMessage(message) {
+            const messagesContainer = document.getElementById('messages-container');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+        }
     </script>
 </body>
 </html>
