@@ -9,6 +9,11 @@
 <body>
     <p>Hello, World!</p>
 
+    <form id="message-form">
+        <input type="text" id="message-input" placeholder="메시지를 입력하세요">
+        <button type="submit">전송</button>
+    </form>
+
     <script>
         // 웹 소켓 서버에 연결
         const socket = new WebSocket('ws://localhost:3000');
@@ -21,6 +26,19 @@
         // 웹 소켓으로부터 메시지를 수신했을 때 이벤트 핸들러
         socket.addEventListener('message', function (event) {
             console.log('서버로부터 메시지 수신:', event.data);
+        });
+
+        // 폼 전송 이벤트 리스너
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 기본 폼 전송 동작 방지
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim(); // 입력된 메시지 가져오기 (공백 제거)
+            if (message !== '') {
+                // 서버에 메시지 보내기
+                socket.send(message);
+                console.log('메시지 전송:', message);
+                messageInput.value = ''; // 입력 필드 초기화
+            }
         });
     </script>
 </body>
