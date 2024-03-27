@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
 </head>
 <body>
-  <p>Hello, World!</p>
+    <p>Hello, World!</p>
+
+    <script>
+        // 웹 소켓 서버에 연결
+        const socket = new WebSocket('ws://localhost:3000');
+
+        // 웹 소켓 연결이 열렸을 때 이벤트 핸들러
+        socket.addEventListener('open', function (event) {
+            console.log('WebSocket 연결 성공');
+        });
+
+        // 웹 소켓으로부터 메시지를 수신했을 때 이벤트 핸들러
+        socket.addEventListener('message', function (event) {
+            console.log('서버로부터 메시지 수신:', event.data);
+        });
+    </script>
 </body>
 </html>
