@@ -2,56 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>HTTP 파일 업로드를 사용하여 도메인 확인하기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <p>Hello, World3</p>
-
-    <form id="message-form">
-        <input type="text" id="message-input" placeholder="메시지를 입력하세요">
-        <button type="submit">전송</button>
-    </form>
-
-    <div id="messages-container"></div>
-
-    <script>
-        // 웹 소켓 서버에 연결
-        const socket = new WebSocket('ws://localhost:3000');
-
-        // 웹 소켓 연결이 열렸을 때 이벤트 핸들러
-        socket.addEventListener('open', function (event) {
-            console.log('WebSocket 연결 성공');
-        });
-
-        // 웹 소켓으로부터 메시지를 수신했을 때 이벤트 핸들러
-        socket.addEventListener('message', function (event) {
-            console.log('서버로부터 메시지 수신:', event.data);
-            // 메시지를 DOM에 추가하여 화면에 표시
-            appendMessage(event.data);
-        });
-
-        // 폼 전송 이벤트 리스너
-        document.getElementById('message-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // 기본 폼 전송 동작 방지
-            const messageInput = document.getElementById('message-input');
-            const message = messageInput.value.trim(); // 입력된 메시지 가져오기 (공백 제거)
-            if (message !== '') {
-                // 서버에 메시지 보내기
-                socket.send(message);
-                console.log('메시지 전송:', message);
-                messageInput.value = ''; // 입력 필드 초기화
-            }
-        });
-
-        // 메시지를 DOM에 추가하여 화면에 표시하는 함수
-        function appendMessage(message) {
-            const messagesContainer = document.getElementById('messages-container');
-            const messageElement = document.createElement('div');
-            messageElement.textContent = message;
-            messagesContainer.appendChild(messageElement);
-        }
-    </script>
+    <div class="container">
+        <h1>HTTP 파일 업로드를 사용하여 도메인 확인하기</h1>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">파일 선택:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload"><br>
+            <input type="submit" value="파일 업로드" name="submit">
+        </form>
+    </div>
 </body>
 </html>
