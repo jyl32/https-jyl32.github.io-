@@ -14,8 +14,12 @@
     function receiveData() {
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          document.getElementById("receivedData").innerText = "Received Data: " + xhr.responseText;
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            document.getElementById("receivedData").innerText = "Received Data: " + xhr.responseText;
+          } else {
+            document.getElementById("receivedData").innerText = "Error: Failed to receive data";
+          }
         }
       };
       xhr.open("GET", "https://jyl32.github.io/https-jyl32.github.io-/"); // 데이터를 받을 URL로 변경
