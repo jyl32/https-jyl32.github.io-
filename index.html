@@ -1,58 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTTP 파일 업로드를 사용하여 도메인 확인하기3</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: block;
-        }
-        input[type="file"] {
-            margin-bottom: 20px;
-        }
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Receiving Website</title>
 </head>
 <body>
-    <div class="container">
-        <h1>HTTP 파일 업로드를 사용하여 도메인 확인하기</h1>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            <label for="fileToUpload">파일 선택:</label>
-            <input type="file" name="fileToUpload" id="fileToUpload"><br>
-            <input type="submit" value="파일 업로드" name="submit">
-        </form>
-    </div>
+  <h1>Data Receiving Website</h1>
+  <div id="receivedData">Received Data:</div>
+
+  <script>
+    // AJAX를 이용하여 데이터를 수신하는 함수
+    function receiveData() {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          document.getElementById("receivedData").innerText = "Received Data: " + xhr.responseText;
+        }
+      };
+      xhr.open("GET", "https://jyl32.github.io/https-jyl32.github.io-/"); // 데이터를 받을 URL로 변경
+      xhr.send();
+    }
+
+    // 페이지가 로드되면 데이터 수신 함수 호출
+    window.onload = receiveData;
+  </script>
 </body>
 </html>
